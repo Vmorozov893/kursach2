@@ -9,4 +9,5 @@ import java.util.Set;
 
 public interface ExaminerService {
     public HashSet<Question> get(Integer amount);
+
 }

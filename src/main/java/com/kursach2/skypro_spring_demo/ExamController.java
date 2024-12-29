@@ -1,9 +1,7 @@
 package com.kursach2.skypro_spring_demo;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.kursach2.skypro_spring_demo.service.JavaQuestionServiceImpl;
+import org.springframework.web.bind.annotation.*;
 import com.kursach2.skypro_spring_demo.service.ExaminerServiceImpl;
 
 import java.util.Optional;
@@ -13,8 +11,11 @@ import java.util.Optional;
 public class ExamController {
     private final ExaminerServiceImpl examinerService;
 
-    public ExamController(ExaminerServiceImpl examinerService) {
+    private final JavaQuestionServiceImpl javaQuestionService;
+
+    public ExamController(ExaminerServiceImpl examinerService, JavaQuestionServiceImpl javaQuestionService) {
         this.examinerService = examinerService;
+        this.javaQuestionService = javaQuestionService;
     }
 
     @GetMapping(path = "get/{amount}")
@@ -25,5 +26,21 @@ public class ExamController {
             throw new RuntimeException("Ошибка!!!");
         }
     }
+
+    @GetMapping(path = "java")
+    public String getAll(){
+        if(javaQuestionService.getSet()!=null) {
+            return javaQuestionService.getSet().toString();
+        }else{
+            throw new RuntimeException("Ошибка!!!");
+        }
+    }
+
+    @GetMapping(path = "java/add")
+    public String add(@RequestParam(required = false) String question,@RequestParam(required = false) String answer){
+        return javaQuestionService.addQuestion(question,answer).toString();
+    }
+
+
 
 }

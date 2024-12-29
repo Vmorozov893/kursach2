@@ -9,9 +9,10 @@ import java.util.HashSet;
 public class JavaQuestionServiceImpl implements QuestionService{
     HashSet<Question> set = new HashSet<>();
 
-    public Question addQuestion(Question question){
-        set.add(question);
-        return question;
+    public Question addQuestion(String question, String answer){
+        Question question1= new Question(question,answer);
+        set.add(question1);
+        return question1;
     }
 
     public Question findQuestion(Question question){
