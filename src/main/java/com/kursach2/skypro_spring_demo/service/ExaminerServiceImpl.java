@@ -1,31 +1,31 @@
 package com.kursach2.skypro_spring_demo.service;
 
 import com.kursach2.skypro_spring_demo.Question;
+import com.kursach2.skypro_spring_demo.exception.BadRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.HashSet;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService{
-    JavaQuestionServiceImpl javaQuestionService;
+    QuestionServices questionServices;
 
-    public ExaminerServiceImpl(JavaQuestionServiceImpl javaQuestionService) {
-        this.javaQuestionService = javaQuestionService;
+    public ExaminerServiceImpl(QuestionServices questionServices) {
+        this.questionServices = questionServices;
     }
 
-    @Override
-    public HashMap<String, Question> get(Integer amount) {
-        if(javaQuestionService.getMap().size()<amount){
-            throw new RuntimeException("Столько вопросов нет");
+
+    public HashSet<Question> getQuestions(Integer amount) {
+        if(questionServices.getMap().size()<amount){
+            throw new BadRequest("Вопросов слишком мало!");
+        }else if (amount<1) {
+            throw new BadRequest("Кол-во вопросов должно быть натуральным числом!");
         }
-        HashMap<String,Question> map1 = new HashMap<>();
-        for(Question question: javaQuestionService.getMap()){
-            if(map1.size()<=amount){
-                map1.put(question.getQuestion(),question);
-            }
+        HashSet<Question> set1 = new HashSet<>();
+        while(set1.size()<=amount){
+            set1.add(questionServices.getRandomQuestion());
         }
-        return map1;
+        return set1;
     }
 
 }

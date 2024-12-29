@@ -1,7 +1,6 @@
 package com.kursach2.skypro_spring_demo;
 
-import com.kursach2.skypro_spring_demo.service.JavaQuestionServiceImpl;
-import com.kursach2.skypro_spring_demo.service.QuestionService;
+import com.kursach2.skypro_spring_demo.service.QuestionServices;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("exam/java")
 public class JavaController {
 
-    private final QuestionService javaQuestionService;
+    private final QuestionServices QuestionServices;
 
-    public JavaController(QuestionService javaQuestionService) {
-        this.javaQuestionService = javaQuestionService;
+    public JavaController(QuestionServices QuestionServices) {
+        this.QuestionServices = QuestionServices;
     }
 
     @GetMapping(path = "")
     public String getAll(){
-        if(javaQuestionService.getMap()!=null) {
-            return javaQuestionService.getMap().toString();
+        if(QuestionServices.getMap()!=null) {
+            return QuestionServices.getMap().toString();
         }else{
             throw new RuntimeException("Ошибка!!!");
         }
@@ -28,23 +27,23 @@ public class JavaController {
 
     @GetMapping(path = "add")
     public String add(@RequestParam(required = false) String question, @RequestParam(required = false) String answer){
-        return javaQuestionService.addQuestion(question,answer).toString();
+        return QuestionServices.addQuestion(question,answer).toString();
     }
 
     @GetMapping(path = "find")
     public String find(@RequestParam(required = false) String question){
-        return javaQuestionService.findQuestion(question).toString();
+        return QuestionServices.findQuestion(question).toString();
     }
 
     @GetMapping(path = "remove")
     public String remove(@RequestParam(required = false) String question, @RequestParam(required = false) String answer){
-        return javaQuestionService.removeQuestion(question,answer).toString();
+        return QuestionServices.removeQuestion(question,answer).toString();
     }
 
     @GetMapping(path = "added")
     public String added(){
-        javaQuestionService.addedQuestions();
-        return javaQuestionService.getMap().toString();
+        QuestionServices.addedQuestions();
+        return QuestionServices.getMap().toString();
     }
 
 }

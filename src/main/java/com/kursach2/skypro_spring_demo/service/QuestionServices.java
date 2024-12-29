@@ -2,12 +2,10 @@ package com.kursach2.skypro_spring_demo.service;
 
 import com.kursach2.skypro_spring_demo.Question;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 
-public interface QuestionService {
+public interface QuestionServices {
 
     public Question addQuestion(String question, String answer);
 

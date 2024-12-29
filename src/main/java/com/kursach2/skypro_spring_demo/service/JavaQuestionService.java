@@ -4,12 +4,11 @@ import com.kursach2.skypro_spring_demo.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
 @Service
-public class JavaQuestionServiceImpl implements QuestionService {
+public class JavaQuestionService implements QuestionServices {
     HashMap<String, Question> map = new HashMap<>();
 
     public Question addQuestion(String question, String answer) {
