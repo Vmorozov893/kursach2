@@ -20,7 +20,7 @@ public class ExaminerServiceImpl implements ExaminerService{
             throw new RuntimeException("Столько вопросов нет");
         }
         HashMap<String,Question> map1 = new HashMap<>();
-        for(Question question: javaQuestionService.getMap().values()){
+        for(Question question: javaQuestionService.getMap()){
             if(map1.size()<=amount){
                 map1.put(question.getQuestion(),question);
             }

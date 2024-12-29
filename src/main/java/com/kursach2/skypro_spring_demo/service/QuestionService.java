@@ -4,11 +4,10 @@ import com.kursach2.skypro_spring_demo.Question;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 
 public interface QuestionService {
-
-
 
     public Question addQuestion(String question, String answer);
 
@@ -16,5 +15,9 @@ public interface QuestionService {
 
     public Question removeQuestion(String question, String answer);
 
-    public HashMap<String,Question> getMap();
+    public Question getRandomQuestion();
+
+    public void addedQuestions();
+
+    public List<Question> getMap();
 }
