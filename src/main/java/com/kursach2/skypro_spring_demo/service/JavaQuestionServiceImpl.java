@@ -1,14 +1,13 @@
-package service;
+package com.kursach2.skypro_spring_demo.service;
 
 import com.kursach2.skypro_spring_demo.Question;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class JavaQuestionServiceImpl implements QuestionService{
-    Set<Question> set = new HashSet<>();
+    HashSet<Question> set = new HashSet<>();
 
     public Question addQuestion(Question question){
         set.add(question);
@@ -28,6 +27,10 @@ public class JavaQuestionServiceImpl implements QuestionService{
         }
         set.remove(question);
         return question;
+    }
+
+    public HashSet<Question> getSet(){
+        return set;
     }
 
 
