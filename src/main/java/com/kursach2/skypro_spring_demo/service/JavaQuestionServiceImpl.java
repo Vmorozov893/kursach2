@@ -15,19 +15,21 @@ public class JavaQuestionServiceImpl implements QuestionService{
         return question1;
     }
 
-    public Question findQuestion(Question question){
-        if(!set.contains(question)){
+    public Question findQuestion(String question, String answer){
+        Question question1= new Question(question,answer);
+        if(!set.contains(question1)){
             throw new RuntimeException("Вопрос не найден");
         }
-        return question;
+        return question1;
     }
 
-    public Question removeQuestion(Question question){
-        if(!set.contains(question)){
+    public Question removeQuestion(String question, String answer){
+        Question question1= new Question(question,answer);
+        if(!set.contains(question1)){
             throw new RuntimeException("Вопрос не найден");
         }
-        set.remove(question);
-        return question;
+        set.remove(question1);
+        return question1;
     }
 
     public HashSet<Question> getSet(){

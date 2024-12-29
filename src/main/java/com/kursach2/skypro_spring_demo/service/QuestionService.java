@@ -11,9 +11,9 @@ public interface QuestionService {
 
     public Question addQuestion(String question, String answer);
 
-    public Question findQuestion(Question question);
+    public Question findQuestion(String question, String answer);
 
-    public Question removeQuestion(Question question);
+    public Question removeQuestion(String question, String answer);
 
     public HashSet<Question> getSet();
 }
