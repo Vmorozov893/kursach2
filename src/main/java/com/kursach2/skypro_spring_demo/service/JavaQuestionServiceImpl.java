@@ -3,37 +3,43 @@ package com.kursach2.skypro_spring_demo.service;
 import com.kursach2.skypro_spring_demo.Question;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 @Service
-public class JavaQuestionServiceImpl implements QuestionService{
-    HashSet<Question> set = new HashSet<>();
+public class JavaQuestionServiceImpl implements QuestionService {
+    HashMap<String, Question> map = new HashMap<>();
 
-    public Question addQuestion(String question, String answer){
-        Question question1= new Question(question,answer);
-        set.add(question1);
+    public Question addQuestion(String question, String answer) {
+        Question question1 = new Question(question, answer);
+        if (this.map.get(question) != null) {
+            throw new RuntimeException("Такой вопрос уже есть");
+        }
+        map.put(question, question1);
         return question1;
     }
 
-    public Question findQuestion(String question, String answer){
-        Question question1= new Question(question,answer);
-        if(!set.contains(question1)){
+    public Question findQuestion(String question) {
+        if (this.map.get(question) == null) {
             throw new RuntimeException("Вопрос не найден");
         }
-        return question1;
+        return this.map.get(question);
     }
 
-    public Question removeQuestion(String question, String answer){
-        Question question1= new Question(question,answer);
-        if(!set.contains(question1)){
+    public Question removeQuestion(String question, String answer) {
+        Question question1 = new Question(question, answer);
+        if (this.map.get(question) == null) {
             throw new RuntimeException("Вопрос не найден");
         }
-        set.remove(question1);
+        if (!this.map.get(question).getAnswer().equals(answer)) {
+            throw new RuntimeException("Ответы не совпадают");
+        }
+        this.map.remove(question);
         return question1;
     }
 
-    public HashSet<Question> getSet(){
-        return set;
+    public HashMap<String, Question> getMap() {
+        return this.map;
     }
 
 

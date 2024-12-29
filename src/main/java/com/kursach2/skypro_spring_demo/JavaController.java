@@ -19,8 +19,8 @@ public class JavaController {
 
     @GetMapping(path = "")
     public String getAll(){
-        if(javaQuestionService.getSet()!=null) {
-            return javaQuestionService.getSet().toString();
+        if(javaQuestionService.getMap()!=null) {
+            return javaQuestionService.getMap().toString();
         }else{
             throw new RuntimeException("Ошибка!!!");
         }
@@ -32,8 +32,8 @@ public class JavaController {
     }
 
     @GetMapping(path = "find")
-    public String find(@RequestParam(required = false) String question, @RequestParam(required = false) String answer){
-        return javaQuestionService.findQuestion(question,answer).toString();
+    public String find(@RequestParam(required = false) String question){
+        return javaQuestionService.findQuestion(question).toString();
     }
 
     @GetMapping(path = "remove")

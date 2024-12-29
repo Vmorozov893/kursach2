@@ -3,6 +3,7 @@ package com.kursach2.skypro_spring_demo.service;
 import com.kursach2.skypro_spring_demo.Question;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 @Service
@@ -14,17 +15,17 @@ public class ExaminerServiceImpl implements ExaminerService{
     }
 
     @Override
-    public HashSet<Question> get(Integer amount) {
-        if(javaQuestionService.getSet().size()<amount){
+    public HashMap<String, Question> get(Integer amount) {
+        if(javaQuestionService.getMap().size()<amount){
             throw new RuntimeException("Столько вопросов нет");
         }
-        HashSet<Question> set1 = new HashSet<>();
-        for(Question question: javaQuestionService.getSet()){
-            if(set1.size()<=amount){
-                set1.add(question);
+        HashMap<String,Question> map1 = new HashMap<>();
+        for(Question question: javaQuestionService.getMap().values()){
+            if(map1.size()<=amount){
+                map1.put(question.getQuestion(),question);
             }
         }
-        return set1;
+        return map1;
     }
 
 }
