@@ -38,15 +38,14 @@ public class ExaminerServiceImplTests {
     int amount = 1;
     HashSet<Question> expectedQuestion = new HashSet<>();
     expectedQuestion.add(new Question("С чего начинается нумерация массива?","С нуля."));
-    //expectedQuestion.add(new Question("Для чего нужно ключевое слово new?","Для создания новых объектов."));
-    //expectedQuestion.add(new Question("От какого класса наследуют все классы Java?","Object."));
+
 
     Mockito.when(javaQuestionService.getMap()).thenReturn((List<Question>) listQuestions );
     Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn((Question) question );
 
     HashSet<Question> actualQuestion = examinerService.getQuestions(1);
 
-    Assertions.assertEquals(expectedQuestion,actualQuestion);
-}
+    Assertions.assertEquals(expectedQuestion.toString(),actualQuestion.toString());
+    }
 
 }
