@@ -21,7 +21,7 @@ import java.util.stream.Stream;
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTests {
     @Mock
-    private JavaQuestionService javaQuestionService;
+    private QuestionServices questionServices;
 
     @InjectMocks
     private ExaminerServiceImpl examinerService;
@@ -41,8 +41,8 @@ public class ExaminerServiceImplTests {
     expectedQuestion.add(new Question("С чего начинается нумерация массива?","С нуля."));
 
 
-    Mockito.when(javaQuestionService.getMap()).thenReturn((List<Question>) listQuestions );
-    Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn((Question) question );
+    Mockito.when(questionServices.getMap()).thenReturn((List<Question>) listQuestions );
+    Mockito.when(questionServices.getRandomQuestion()).thenReturn((Question) question );
 
     HashSet<Question> actualQuestion = examinerService.getQuestions(1);
 
@@ -53,7 +53,7 @@ public class ExaminerServiceImplTests {
     public void getQuestionsTestWithExceptionOne() {
         int amount = 4;
 
-        Mockito.when(javaQuestionService.getMap()).thenReturn((List<Question>) listQuestions );
+        Mockito.when(questionServices.getMap()).thenReturn((List<Question>) listQuestions );
 
         BadRequest thrown = Assertions.assertThrows(BadRequest.class, () -> {
             examinerService.getQuestions(amount);
@@ -66,7 +66,7 @@ public class ExaminerServiceImplTests {
     public void getQuestionsTestWithExceptionTwo() {
         int amount = -1;
 
-        Mockito.when(javaQuestionService.getMap()).thenReturn((List<Question>) listQuestions );
+        Mockito.when(questionServices.getMap()).thenReturn((List<Question>) listQuestions );
 
         BadRequest thrown = Assertions.assertThrows(BadRequest.class, () -> {
             examinerService.getQuestions(amount);
