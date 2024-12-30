@@ -40,10 +40,4 @@ public class JavaController {
         return QuestionServices.removeQuestion(question,answer).toString();
     }
 
-    @GetMapping(path = "added")
-    public String added(){
-        QuestionServices.addedQuestions();
-        return QuestionServices.getMap().toString();
-    }
-
 }

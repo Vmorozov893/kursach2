@@ -8,7 +8,8 @@ import java.util.HashSet;
 
 @Service
 public class ExaminerServiceImpl implements ExaminerService{
-    QuestionServices questionServices;
+    private final QuestionServices questionServices;
+
 
     public ExaminerServiceImpl(QuestionServices questionServices) {
         this.questionServices = questionServices;
@@ -21,11 +22,11 @@ public class ExaminerServiceImpl implements ExaminerService{
         }else if (amount<1) {
             throw new BadRequest("Кол-во вопросов должно быть натуральным числом!");
         }
-        HashSet<Question> set1 = new HashSet<>();
-        while(set1.size()<=amount){
-            set1.add(questionServices.getRandomQuestion());
+        HashSet<Question> setResult = new HashSet<>();
+        while(setResult.size()<amount){
+            setResult.add(questionServices.getRandomQuestion());
         }
-        return set1;
+        return setResult;
     }
 
 }

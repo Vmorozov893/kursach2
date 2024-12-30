@@ -1,5 +1,7 @@
 package com.kursach2.skypro_spring_demo;
 
+import java.util.Objects;
+
 public class Question {
     private final String question;
     private final String answer;
@@ -24,4 +26,6 @@ public class Question {
                 ", Answer: " + answer +
                 '}';
     }
+
+
 }

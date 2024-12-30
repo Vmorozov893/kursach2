@@ -15,7 +15,5 @@ public interface QuestionServices {
 
     public Question getRandomQuestion();
 
-    public void addedQuestions();
-
     public List<Question> getMap();
 }
