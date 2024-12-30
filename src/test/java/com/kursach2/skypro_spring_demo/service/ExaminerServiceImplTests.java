@@ -1,6 +1,7 @@
 package com.kursach2.skypro_spring_demo.service;
 
 import com.kursach2.skypro_spring_demo.Question;
+import com.kursach2.skypro_spring_demo.exception.BadRequest;
 import org.assertj.core.api.CollectionAssert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ public class ExaminerServiceImplTests {
     private final List<Question> listQuestions = questionsMap.values().stream().toList();
 
     @Test
-    public void getQuestionsTest1() {
+    public void getQuestionsTest() {
     int amount = 1;
     HashSet<Question> expectedQuestion = new HashSet<>();
     expectedQuestion.add(new Question("С чего начинается нумерация массива?","С нуля."));
@@ -47,5 +48,32 @@ public class ExaminerServiceImplTests {
 
     Assertions.assertEquals(expectedQuestion.toString(),actualQuestion.toString());
     }
+
+    @Test
+    public void getQuestionsTestWithExceptionOne() {
+        int amount = 4;
+
+        Mockito.when(javaQuestionService.getMap()).thenReturn((List<Question>) listQuestions );
+
+        BadRequest thrown = Assertions.assertThrows(BadRequest.class, () -> {
+            examinerService.getQuestions(amount);
+        });
+
+        Assertions.assertEquals("Вопросов слишком мало!", thrown.getMessage());
+    }
+
+    @Test
+    public void getQuestionsTestWithExceptionTwo() {
+        int amount = -1;
+
+        Mockito.when(javaQuestionService.getMap()).thenReturn((List<Question>) listQuestions );
+
+        BadRequest thrown = Assertions.assertThrows(BadRequest.class, () -> {
+            examinerService.getQuestions(amount);
+        });
+
+        Assertions.assertEquals("Кол-во вопросов должно быть натуральным числом!", thrown.getMessage());
+    }
+
 
 }
