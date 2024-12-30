@@ -14,12 +14,12 @@ public class JavaQuestionService implements QuestionServices {
     private final Random random = new Random();
 
     public Question addQuestion(String question, String answer) {
-        Question question1 = new Question(question, answer);
-        if (!map.containsKey(question)) {
+        Question questionWithAnswer = new Question(question, answer);
+        if (map.containsKey(question)) {
             throw new RuntimeException("Такой вопрос уже есть");
         }
-        map.put(question, question1);
-        return question1;
+        map.put(question, questionWithAnswer);
+        return questionWithAnswer;
     }
 
     public Question findQuestion(String question) {
@@ -30,7 +30,7 @@ public class JavaQuestionService implements QuestionServices {
     }
 
     public Question removeQuestion(String question, String answer) {
-        Question question1 = new Question(question, answer);
+        Question questionWithAnswer = new Question(question, answer);
         if (!map.containsKey(question)) {
             throw new RuntimeException("Вопрос не найден");
         }
@@ -38,7 +38,7 @@ public class JavaQuestionService implements QuestionServices {
             throw new RuntimeException("Ответы не совпадают");
         }
         map.remove(question);
-        return question1;
+        return questionWithAnswer;
     }
 
     public Question getRandomQuestion(){
